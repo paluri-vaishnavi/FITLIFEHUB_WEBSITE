@@ -1,0 +1,2456 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>Nutrition Tracker</title>
+
+	<meta charset="UTF-8">
+	<meta name="description" content="Nutrition tracker">
+	<meta name="keywords" content="nutri tracker, nutrition tracker, nutrition, nutrients, app, daily requirements">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link href="https://fonts.googleapis.com/css?family=Quicksand:400,700" rel="stylesheet">
+  <link rel="stylesheet" href="./nutrition.css">
+</head>
+
+<body>
+<header id="headerOne">	
+  <h3><b>Hydration</b> Tracker</h3>
+	<div id="divLogo">
+	</div>
+
+	<nav id="navUl">
+		<ul id="ulNav">
+		</ul>
+	</nav>
+</header>
+
+<main id="mainOne">
+	<div id="divLogIn">
+		<h2>Enter your name</h2>
+		<form id="formLogIn">
+			Name:
+			<input class="inputs" id="inputName" type="text" name="name" placeholder="Please enter your name">
+			<br>
+			<button class="btns" id="btnLogIn" type="button" onclick="logIn()">Next</button> 
+			<p id="messageFillIn"></p>
+		</form>
+	</div>
+
+	<div id="divPersonalInfo">
+		<h2 id="personalGreeting">HI!</h2>
+		<p>What are your daily nutritional requirements?</p>
+		<h3>Let's find out!</h3>
+		<form id="formPersonalInfo">
+			<table id="tablePersonalInfo">
+				<tr>
+					<td class="cellPI">Age:</td>
+					<td><input class="inputs" id="inputAge" type="number" name="age" min="18" max="150"></td>
+				</tr>
+				<tr>
+					<td class="cellPI">Gender:</td>
+					<td>
+						<select class="inputs" id="selectSex" onchange="showSelect()">
+							<option value=""></option>
+							<option value="female">female</option>
+							<option value="male">male</option>
+              <option value="male">others</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td class="cellPI"><span id="pregnantLactating">PG/LAC:</span></td>
+					<td>
+						<select class="inputs" id="selectPregnantLactating"> 
+							<option value=""></option>
+							<option value="pregnant1">Pregnant (1st trimester)</option>
+							<option value="pregnant2">Pregnant (2nd trimester)</option>
+							<option value="pregnant3">Pregnant (3rd trimester)</option>
+							<option value="lactating1">Lactating (0-6 months postpartum)</option>
+							<option value="lactating2">Lactating (7-12 months postpartum)</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td class="cellPI">Height:</td>
+					<td><input class="inputs" id="inputHeight" type="number" name="height" min="100" max="250"> cm</td>
+				</tr>
+				<tr>
+					<td class="cellPI">Weight:</td>
+					<td><input class="inputs" id="inputWeight" type="number" name="weight" min="20" max="300"> kg</td>
+				</tr>
+				<tr>
+					<td class="cellPI">Lifestyle:</td>
+					<td>
+						<select class="inputs" id="selectLifestyle">
+							<option value=""></option>
+							<option value="sedentary">Sedentary (little or no exercise)</option>
+							<option value="littleActive">Lightly Active (light exercise/sports 1-3 days/week)</option>
+							<option value="active">Moderately Active (moderate exercise/sports 3-5 days/week)</option>
+							<option value="veryActive">Very Active (hard exercise/sports 6-7 days a week)</option>
+						</select>
+					</td>
+				</tr>
+			</table>
+			<button class="btns" id="btnCalculate" type="button" onclick="calculate()">Calculate</button>
+			<p id="messageFillIn2"></p>
+		</form>
+	</div>
+
+	<div id="divDailyRequirement">
+		<h2>YOUR DAILY NUTRITIONAL REQUIREMENTS</h2>
+		<table id="tableDailyRequirement">
+			<tr>
+				<td>Calories (kcal)</td>
+				<td id="reqCalories"></td>
+			</tr>
+			<tr>
+				<td>Total Carbohydrate (g)</td>
+				<td id="reqTotalCarbohydrate"></td>
+			</tr>
+			<tr>
+				<td>Linoleic Acid (g)</td>
+				<td id="reqLinoleicAcid"></td>
+			</tr>
+			<tr>
+				<td>Alpha-Linoleic Acid (g)</td>
+				<td id="reqAlphaLinoleicAcid"></td>
+			</tr>
+			<tr>
+				<td>Protein (g)</td>
+				<td id="reqProtein"></td>
+			</tr>
+			<tr>
+				<td>Dietary Fiber (g)</td>
+				<td id="reqDietaryFiber"></td>
+			</tr>
+			<tr>
+				<td class="tableHeaders">Vitamins</td>
+			</tr>
+			<tr>
+				<td>Vitamin A (&#181;g)</td>
+				<td id="reqVitA"></td>
+			</tr>
+			<tr>
+				<td>Vitamin D (&#181;g)</td>
+				<td id="reqVitD"></td>
+			</tr>
+			<tr>
+				<td>Vitamin E (mg)</td>
+				<td id="reqVitE"></td>
+			</tr>
+			<tr>
+				<td>Vitamin K (&#181;g)</td>
+				<td id="reqVitK"></td>
+			</tr>	
+			<tr>
+				<td>Vitamin C (mg)</td>
+				<td id="reqVitC"></td>
+			</tr>
+			<tr>
+				<td>Vitamin B1 (mg)</td>
+				<td id="reqVitB1"></td>
+			</tr>
+			<tr>
+				<td>Vitamin B2 (mg)</td>
+				<td id="reqVitB2"></td>
+			</tr>	
+			<tr>
+				<td>Vitamin B3 (mg)</td>
+				<td id="reqVitB3"></td>
+			</tr>
+			<tr>
+				<td>Vitamin B5 (mg)</td>
+				<td id="reqVitB5"></td>
+			</tr>
+			<tr>
+				<td>Vitamin B6 (mg)</td>
+				<td id="reqVitB6"></td>
+			</tr>
+			<tr>
+				<td>Vitamin B9 (&#181;g)</td>
+				<td id="reqVitB9"></td>
+			</tr>
+			<tr>
+				<td>Vitamin B12 (&#181;g)</td>
+				<td id="reqVitB12"></td>
+			</tr>
+			<tr>
+				<td class="tableHeaders">Minerals</td>
+			</tr>
+			<tr>
+				<td>Calcium (mg)</td>
+				<td id="reqCa"></td>
+			</tr>
+			<tr>
+				<td>Copper (&#181;g)</td>
+				<td id="reqCu"></td>
+			</tr>
+			<tr>
+				<td>Iron (mg)</td>
+				<td id="reqFe"></td>
+			</tr>
+			<tr>
+				<td>Magnesium (mg)</td>
+				<td id="reqMg"></td>
+			</tr>	
+			<tr>
+				<td>Manganese (mg)</td>
+				<td id="reqMn"></td>
+			</tr>
+			<tr>
+				<td>Phosphorus (mg)</td>
+				<td id="reqP"></td>
+			</tr>
+			<tr>
+				<td>Selenium (&#181;g)</td>
+				<td id="reqSe"></td>
+			</tr>	
+			<tr>
+				<td>Zinc (mg)</td>
+				<td id="reqZn"></td>
+			</tr>
+			<tr>
+				<td>Potassium (g)</td>
+				<td id="reqK"></td>
+			</tr>
+			<tr>
+				<td>Sodium (g)</td>
+				<td id="reqNa"></td>
+			</tr>
+		</table>
+		<button class="btns" id="btnNext" type="button" onclick="next()">Next</button>		
+	</div>
+
+	<div id="divQuestion">
+		<h2 id="personalQuestion">, WHAT HAVE YOU EATEN TODAY?</h2>
+		<p>Have you met your nutritional needs?</p>
+		<h3>Let's find out!</h3>
+		<button class="btns" id="btnCheckMyDay" type="button" onclick="checkMyDay()">Check</button>
+	</div>
+
+
+
+	<div id="divFoodSelection">
+		<h2>CHOOSE YOUR FOOD</h2>
+		<form id="formDailyFood">
+			<span class="minSpan">Grains:
+			<select class="inputsDF" id="selectGrains" onchange="addFood(this)">
+				<option value=""></option>
+				<option value="Oats, raw">Oats, raw</option>
+				<option value="Rice, raw">Rice, raw</option>
+				<option value="Quinoa, raw">Quinoa, raw</option>
+        <option value="Roti made with maida">Roti made with maida</option>
+        <option value="Roti made with wheat">Roti made with wheat</option>
+        <option value="Butter Naan">Butter Naan</option>
+        <option value="Millets Roti">Millets Roti</option>
+			</select>
+			</span>
+			<span class="minSpan">
+			Vegetables:
+			<select class="inputsDF" id="selectVegetables" onchange="addFood(this)">
+				<option value=""></option>
+				<option value="Broccoli, raw">Broccoli, raw</option>
+				<option value="Carrots, raw">Carrots, raw</option>
+				<option value="Potatos, raw, skin">Potatos, raw, skin</option>
+        <option value="Cooked Broccoli">Cooked Broccoli</option>
+        <option value="Cooked Carrots">Cooked Carrots</option>
+        <option value="Cooked Potatoes">Cooked Potatoes</option>
+        <option value="Tomatoes">Tomatoes</option>
+        <option value="Onions">Onions</option>
+        <option value="Bell Peppers (Capsicum)">Bell Peppers (Capsicum)</option>
+        <option value="Eggplants (Brinjal or Aubergine)">Eggplants (Brinjal or Aubergine)</option>
+        <option value="Okra (Ladyfinger or Bhindi)">Okra (Ladyfinger or Bhindi)</option>
+        <option value="Spinach">Spinach</option>
+        <option value="Cauliflower">Cauliflower</option>
+        <option value="Cabbage">Cabbage</option>
+        <option value="Carrots">Carrots</option>
+        <option value="Green Peas">Green Peas</option>
+        <option value="Green Beans">Green Beans</option>
+        <option value="Bottle Gourd (Lauki or Dudhi)">Bottle Gourd (Lauki or Dudhi)</option>
+        <option value="Bitter Gourd (Karela)">Bitter Gourd (Karela)</option>
+        <option value="Radishes">Radishes</option>
+        <option value="Spinach (Palak)">Spinach (Palak)</option>
+        <option value="Coriander Leaves">Coriander Leaves</option>
+        <option value="Mint Leaves">Mint Leaves</option>
+        <option value="Fenugreek Leaves (Methi)">Fenugreek Leaves (Methi)</option>
+        <option value="Garlic">Garlic</option>
+			</select>
+			</span>
+			<span class="minSpan">
+			Fruits:
+			<select class="inputsDF" id="selectFruits" onchange="addFood(this)">
+				<option value=""></option>
+				<option value="Mangoes">Mangoes</option>
+        <option value="Grapes">Grapes</option>
+        <option value="Apples">Apples</option>
+        <option value="Apricots">Apricots</option>
+        <option value="Oranges">Oranges</option>
+        <option value="Banana">Banana</option>
+        <option value="Avocados">Avocados</option>
+        <option value="Guava">Guava</option>
+        <option value="Litchi">Litchi</option>
+        <option value="Papaya">Papaya</option>
+        <option value="Sapota">Sapota</option>
+        <option value="Water Melons">Water Melons</option>
+			</select>
+			</span>
+		</form>
+
+		<form id="formMyPlate">
+			<table id="tableMyPlate">
+				<tr>
+					<th class="tableHeadersNT pinkHeadline" id="tableHeaderArticals">Artical</th>
+					<th class="tableHeadersNT pinkHeadline" id="tableHeaderQuantity">Quantity</th>
+					<th class="tableHeadersNT" id="tableHeaderGrams"></th>
+					<th class="tableHeadersNT" id="tableHeaderDelete"></th>
+				</tr>
+			</table>
+			<br>
+			<p><small>Show me my daily nutritional profile</small></p>
+			<button class="btns" id="btnTracking" type="button" onclick="tracking()">Show me</button>
+			<p id="messageFillIn3"></p>
+		</form>
+	</div>
+
+	<div id="divNutritionTracker">
+		<h2>DAILY NUTRITIONAL PROFILE</h2>
+		<table id="tableNutritionTracker">
+			<tr>
+				<td class="cellWidth">Calories</td>
+				<td id="Calories" class="cellsProgressBar"><div class="divProgressBar"></div></td>
+			</tr>
+			<tr>
+				<td class="cellWidth">Total Carbohydrate</td>
+				<td id="TotalCarbohydrate" class="cellsProgressBar"><div class="divProgressBar"></div></td>
+			</tr>
+			<tr>
+				<td class="cellWidth">Linoleic Acid</td>
+				<td id="LinoleicAcid" class="cellsProgressBar"><div class="divProgressBar"></div></td>
+			</tr>
+			<tr>
+				<td class="cellWidth">Alpha-Linoleic Acid</td>
+				<td id="AlphaLinoleicAcid" class="cellsProgressBar"><div class="divProgressBar"></div></td>
+			</tr>
+			<tr>
+				<td class="cellWidth">Protein</td>
+				<td id="Protein" class="cellsProgressBar"><div class="divProgressBar"></div></td>
+			</tr>
+			<tr>
+				<td class="cellWidth">Dietary Fiber</td>
+				<td id="DietaryFiber" class="cellsProgressBar"><div class="divProgressBar"></div></td>
+			</tr>
+			<tr>
+				<td class="tableHeaders">Vitamins</td>
+			</tr>
+			<tr>
+				<td class="cellWidth">Vitamin A</td>
+				<td id="VitA" class="cellsProgressBar"><div class="divProgressBar"></div></td>
+			</tr>
+			<tr>
+				<td class="cellWidth">Vitamin D</td>
+				<td id="VitD" class="cellsProgressBar"><div class="divProgressBar"></div></td>
+			</tr>
+			<tr>
+				<td class="cellWidth">Vitamin E</td>
+				<td id="VitE" class="cellsProgressBar"><div class="divProgressBar"></div></td>
+			</tr>
+			<tr>
+				<td class="cellWidth">Vitamin K</td>
+				<td id="VitK" class="cellsProgressBar"><div class="divProgressBar"></div></td>
+			</tr>	
+			<tr>
+				<td class="cellWidth">Vitamin C</td>
+				<td id="VitC" class="cellsProgressBar"><div class="divProgressBar"></div></td>
+			</tr>
+			<tr>
+				<td class="cellWidth">Vitamin B1</td>
+				<td id="VitB1" class="cellsProgressBar"><div class="divProgressBar"></div></td>
+			</tr>
+			<tr>
+				<td class="cellWidth">Vitamin B2</td>
+				<td id="VitB2" class="cellsProgressBar"><div class="divProgressBar"></div></td>
+			</tr>	
+			<tr>
+				<td class="cellWidth">Vitamin B3</td>
+				<td id="VitB3" class="cellsProgressBar"><div class="divProgressBar"></div></td>
+			</tr>
+			<tr>
+				<td class="cellWidth">Vitamin B5</td>
+				<td id="VitB5" class="cellsProgressBar"><div class="divProgressBar"></div></td>
+			</tr>
+			<tr>
+				<td class="cellWidth">Vitamin B6</td>
+				<td id="VitB6" class="cellsProgressBar"><div class="divProgressBar"></div></td>
+			</tr>
+			<tr>
+				<td class="cellWidth">Vitamin B9</td>
+				<td id="VitB9" class="cellsProgressBar"><div class="divProgressBar"></div></td>
+			</tr>
+			<tr>
+				<td class="cellWidth">Vitamin B12</td>
+				<td id="VitB12" class="cellsProgressBar"><div class="divProgressBar"></div></td>
+			</tr>
+			<tr>
+				<td class="tableHeaders">Minerals</td>
+			</tr>
+			<tr>
+				<td class="cellWidth">Calcium</td>
+				<td id="Ca" class="cellsProgressBar"><div class="divProgressBar"></div></td>
+			</tr>
+			<tr>
+				<td class="cellWidth">Copper</td>
+				<td id="Cu" class="cellsProgressBar"><div class="divProgressBar"></div></td>
+			</tr>
+			<tr>
+				<td class="cellWidth">Iron</td>
+				<td id="Fe" class="cellsProgressBar"><div class="divProgressBar"></div></td>
+			</tr>
+			<tr>
+				<td class="cellWidth">Magnesium</td>
+				<td id="Mg" class="cellsProgressBar"><div class="divProgressBar"></div></td>
+			</tr>	
+			<tr>
+				<td class="cellWidth">Manganese</td>
+				<td id="Mn" class="cellsProgressBar"><div class="divProgressBar"></div></td>
+			</tr>
+			<tr>
+				<td class="cellWidth">Phosphorus</td>
+				<td id="P" class="cellsProgressBar"><div class="divProgressBar"></div></td>
+			</tr>
+			<tr>
+				<td class="cellWidth">Selenium</td>
+				<td id="Se" class="cellsProgressBar"><div class="divProgressBar"></div></td>
+			</tr>	
+			<tr>
+				<td class="cellWidth">Zinc</td>
+				<td id="Zn" class="cellsProgressBar"><div class="divProgressBar"></div></td>
+			</tr>
+			<tr>
+				<td class="cellWidth">Potassium</td>
+				<td id="K" class="cellsProgressBar"><div class="divProgressBar"></div></td>
+			</tr>
+			<tr>
+				<td class="cellWidth">Sodium</td>
+				<td id="Na" class="cellsProgressBar"><div class="divProgressBar"></div></td>
+			</tr>
+		</table>
+		<button class="btns" id="btnAddMore" type="button" onclick="addMoreFood()">Add More Food</button>
+	</div>
+
+	
+</main>
+
+<footer id="footerOne">
+</footer>
+
+	<script>
+            //Food's nutritional value 
+            const GRAINS = {
+            "Oats, raw": {
+                "Calories": 389,
+                "TotalCarbohydrate": 66.27,
+                "LinoleicAcid": 2.424,
+                "AlphaLinoleicAcid": 0.111,
+                "Protein": 16.89,
+                "DietaryFiber": 10.6,
+                "VitA": 0,
+                "VitD": 0,
+                "VitE": 0,
+                "VitK": 0,
+                "VitC": 0,
+                "VitB1": 0.763,
+                "VitB2": 0.139,
+                "VitB3": 0.961,
+                "VitB5": 1.349,
+                "VitB6": 0.119,
+                "VitB9": 56,
+                "VitB12": 0,
+                "Ca": 54,
+                "Cu": 626,
+                "Fe": 4.72,
+                "Mg": 177,
+                "Mn": 4.916,
+                "P": 523,
+                "Se": 0,
+                "Zn": 3.97,
+                "K": 0.429,
+                "Na": 0.002
+            },
+            "Rice, raw": {
+                "Calories": 362,
+                "TotalCarbohydrate": 76.17,
+                "LinoleicAcid": 0.918,
+                "AlphaLinoleicAcid": 0.041,
+                "Protein": 7.50,
+                "DietaryFiber": 3.4,
+                "VitA": 0,
+                "VitD": 0,
+                "VitE": 0,
+                "VitK": 0,
+                "VitC": 0,
+                "VitB1": 0.413,
+                "VitB2": 0.043,
+                "VitB3": 4.308,
+                "VitB5": 1.493,
+                "VitB6": 0.509,
+                "VitB9": 20,
+                "VitB12": 0,
+                "Ca": 33,
+                "Cu": 277,
+                "Fe": 1.80,
+                "Mg": 143,
+                "Mn": 3.743,
+                "P": 264,
+                "Se": 0,
+                "Zn": 2.02,
+                "K": 0.268,
+                "Na": 0.004 
+            },           
+            "Quinoa, raw": {
+                "Calories": 368,
+                "TotalCarbohydrate": 64.16,
+                "LinoleicAcid": 2.977,
+                "AlphaLinoleicAcid": 0.260,
+                "Protein": 14.12,
+                "DietaryFiber": 7,
+                "VitA": 8.4,
+                "VitD": 0,
+                "VitE": 2.44,
+                "VitK": 0,
+                "VitC": 0,
+                "VitB1": 0.360,
+                "VitB2": 0.318,
+                "VitB3": 1.520,
+                "VitB5": 0.772,
+                "VitB6": 0.487,
+                "VitB9": 184,
+                "VitB12": 0,
+                "Ca": 47,
+                "Cu": 590,
+                "Fe": 4.57,
+                "Mg": 197,
+                "Mn": 2.033,
+                "P": 457,
+                "Se": 0,
+                "Zn": 3.10,
+                "K": 0.563,
+                "Na": 0.005
+            },
+            "Roti made with maida": {
+    "Calories": 297,
+    "TotalCarbohydrate": 46.15,
+    "LinoleicAcid": 0.728,
+    "AlphaLinoleicAcid": 0.011,
+    "Protein": 8.50,
+    "DietaryFiber": 2.4,
+    "VitA": 0,
+    "VitD": 0,
+    "VitE": 0,
+    "VitK": 0,
+    "VitC": 0,
+    "VitB1": 0.161,
+    "VitB2": 0.063,
+    "VitB3": 1.190,
+    "VitB5": 0.378,
+    "VitB6": 0.074,
+    "VitB9": 23,
+    "VitB12": 0,
+    "Ca": 17,
+    "Cu": 116,
+    "Fe": 1.24,
+    "Mg": 15,
+    "Mn": 0.598,
+    "P": 38,
+    "Se": 0,
+    "Zn": 0.93,
+    "K": 0.063,
+    "Na": 0.002
+},
+"Roti made with wheat": {
+    "Calories": 104,
+    "TotalCarbohydrate": 20.6,
+    "LinoleicAcid": 0.269,
+    "AlphaLinoleicAcid": 0.002,
+    "Protein": 2.96,
+    "DietaryFiber": 2.1,
+    "VitA": 0,
+    "VitD": 0,
+    "VitE": 0,
+    "VitK": 0,
+    "VitC": 0,
+    "VitB1": 0.037,
+    "VitB2": 0.017,
+    "VitB3": 0.484,
+    "VitB5": 0.079,
+    "VitB6": 0.048,
+    "VitB9": 8,
+    "VitB12": 0,
+    "Ca": 7,
+    "Cu": 56,
+    "Fe": 0.46,
+    "Mg": 18,
+    "Mn": 0.467,
+    "P": 54,
+    "Se": 0,
+    "Zn": 0.41,
+    "K": 0.025,
+    "Na": 0.001
+},
+"Butter Naan": {
+    "Calories": 317,
+    "TotalCarbohydrate": 46.8,
+    "LinoleicAcid": 0.923,
+    "AlphaLinoleicAcid": 0.009,
+    "Protein": 8.75,
+    "DietaryFiber": 2.5,
+    "VitA": 0,
+    "VitD": 0,
+    "VitE": 0,
+    "VitK": 0,
+    "VitC": 0,
+    "VitB1": 0.120,
+    "VitB2": 0.053,
+    "VitB3": 1.046,
+    "VitB5": 0.417,
+    "VitB6": 0.074,
+    "VitB9": 30,
+    "VitB12": 0,
+    "Ca": 20,
+    "Cu": 88,
+    "Fe": 0.87,
+    "Mg": 18,
+    "Mn": 0.496,
+    "P": 67,
+    "Se": 0,
+    "Zn": 1.16,
+    "K": 0.035,
+    "Na": 0.282
+},
+"Millets Roti": {
+    "Calories": 132,
+    "TotalCarbohydrate": 22.5,
+    "LinoleicAcid": 0.255,
+    "AlphaLinoleicAcid": 0.004,
+    "Protein": 4.7,
+    "DietaryFiber": 2.8,
+    "VitA": 0,
+    "VitD": 0,
+    "VitE": 0,
+    "VitK": 0,
+    "VitC": 0,
+    "VitB1": 0.016,
+    "VitB2": 0.018,
+    "VitB3": 0.61,
+    "VitB5": 0.223,
+    "VitB6": 0.072,
+    "VitB9": 8,
+    "VitB12": 0,
+    "Ca": 8,
+    "Cu": 75,
+    "Fe": 0.51,
+    "Mg": 38,
+    "Mn": 0.185,
+    "P": 54,
+    "Se": 0,
+    "Zn": 0
+}
+        };
+      
+        const VEGETABLES = {
+            "Broccoli, raw": {
+                "Calories": 34,
+                "TotalCarbohydrate": 6.64,
+                "LinoleicAcid": 0.049,
+                "AlphaLinoleicAcid": 0.063,
+                "Protein": 2.82,
+                "DietaryFiber": 2.6,
+                "VitA": 373.8,
+                "VitD": 0,
+                "VitE": 0.78,
+                "VitK": 101.6,
+                "VitC": 89.2,
+                "VitB1": 0.071,
+                "VitB2": 0.117,
+                "VitB3": 0.639,
+                "VitB5": 0.573,
+                "VitB6": 0.175,
+                "VitB9": 63,
+                "VitB12": 0,
+                "Ca": 47,
+                "Cu": 49,
+                "Fe": 0.73,
+                "Mg": 21,
+                "Mn": 0.210,
+                "P": 66,
+                "Se": 2.5,
+                "Zn": 0.41,
+                "K": 0.316,
+                "Na": 0.033
+            },
+            "Carrots, raw": {
+                "Calories": 41,
+                "TotalCarbohydrate": 9.58,
+                "LinoleicAcid": 0.100,
+                "AlphaLinoleicAcid": 0.002,
+                "Protein": 0.93,
+                "DietaryFiber": 2.8,
+                "VitA": 10023.6,
+                "VitD": 0,
+                "VitE": 0.66,
+                "VitK": 13.2,
+                "VitC": 5.9,
+                "VitB1": 0.066,
+                "VitB2": 0.058,
+                "VitB3": 0.983,
+                "VitB5": 0.273,
+                "VitB6": 0.138,
+                "VitB9": 19,
+                "VitB12": 0,
+                "Ca": 33,
+                "Cu": 45,
+                "Fe": 0.30,
+                "Mg": 12,
+                "Mn": 0.143,
+                "P": 35,
+                "Se": 0.1,
+                "Zn": 0.24,
+                "K": 0.320,
+                "Na": 0.069 
+            },  
+            "Potatos, raw, skin": {
+                "Calories": 58,
+                "TotalCarbohydrate": 12.44,
+                "LinoleicAcid": 0.032,
+                "AlphaLinoleicAcid": 0.010,
+                "Protein": 2.57,
+                "DietaryFiber": 2.5,
+                "VitA": 0,
+                "VitD": 0,
+                "VitE": 0,
+                "VitK": 0,
+                "VitC": 11.4,
+                "VitB1": 0.021,
+                "VitB2": 0.038,
+                "VitB3": 1.033,
+                "VitB5": 0.302,
+                "VitB6": 0.239,
+                "VitB9": 17,
+                "VitB12": 0,
+                "Ca": 30,
+                "Cu": 423,
+                "Fe": 3.24,
+                "Mg": 23,
+                "Mn": 0.602,
+                "P": 38,
+                "Se": 0.3,
+                "Zn": 0.35,
+                "K": 0.413,
+                "Na": 0.010
+            },
+            "Cooked Broccoli": {
+    "Calories": 54,
+    "TotalCarbohydrate": 11.20,
+    "LinoleicAcid": 0.047,
+    "AlphaLinoleicAcid": 0.053,
+    "Protein": 4.65,
+    "DietaryFiber": 4.7,
+    "VitA": 527.8,
+    "VitD": 0,
+    "VitE": 0.88,
+    "VitK": 150.9,
+    "VitC": 49.4,
+    "VitB1": 0.049,
+    "VitB2": 0.109,
+    "VitB3": 0.630,
+    "VitB5": 0.274,
+    "VitB6": 0.166,
+    "VitB9": 87,
+    "VitB12": 0,
+    "Ca": 58,
+    "Cu": 46,
+    "Fe": 0.73,
+    "Mg": 19,
+    "Mn": 0.238,
+    "P": 86,
+    "Se": 1.5,
+    "Zn": 0.41,
+    "K": 0.471,
+    "Na": 0.042
+},
+"Cooked Carrots": {
+    "Calories": 35,
+    "TotalCarbohydrate": 8.22,
+    "LinoleicAcid": 0.090,
+    "AlphaLinoleicAcid": 0.001,
+    "Protein": 0.60,
+    "DietaryFiber": 2.3,
+    "VitA": 17031.4,
+    "VitD": 0,
+    "VitE": 0.56,
+    "VitK": 9.5,
+    "VitC": 3.6,
+    "VitB1": 0.046,
+    "VitB2": 0.055,
+    "VitB3": 0.607,
+    "VitB5": 0.135,
+    "VitB6": 0.096,
+    "VitB9": 10,
+    "VitB12": 0,
+    "Ca": 23,
+    "Cu": 26,
+    "Fe": 0.17,
+    "Mg": 8,
+    "Mn": 0.108,
+    "P": 24,
+    "Se": 0.1,
+    "Zn": 0.19,
+    "K": 0.320,
+    "Na": 0.029 
+},
+"Cooked Potatoes": {
+    "Calories": 87,
+    "TotalCarbohydrate": 19.75,
+    "LinoleicAcid": 0.031,
+    "AlphaLinoleicAcid": 0.010,
+    "Protein": 1.87,
+    "DietaryFiber": 2.2,
+    "VitA": 0,
+    "VitD": 0,
+    "VitE": 0,
+    "VitK": 0,
+    "VitC": 14.4,
+    "VitB1": 0.023,
+    "VitB2": 0.031,
+    "VitB3": 0.849,
+    "VitB5": 0.160,
+    "VitB6": 0.139,
+    "VitB9": 9,
+    "VitB12": 0,
+    "Ca": 9,
+    "Cu": 221,
+    "Fe": 0.88,
+    "Mg": 15,
+    "Mn": 0.309,
+    "P": 37,
+    "Se": 0.2,
+    "Zn": 0.23,
+    "K": 0.500,
+    "Na": 0.009
+},
+"Tomatoes": {
+    "Calories": 18,
+    "TotalCarbohydrate": 3.89,
+    "LinoleicAcid": 0.033,
+    "AlphaLinoleicAcid": 0.004,
+    "Protein": 0.88,
+    "DietaryFiber": 1.2,
+    "VitA": 1025.8,
+    "VitD": 0,
+    "VitE": 0.54,
+    "VitK": 7.9,
+    "VitC": 14.0,
+    "VitB1": 0.037,
+    "VitB2": 0.040,
+    "VitB3": 0.594,
+    "VitB5": 0.101,
+    "VitB6": 0.080,
+    "VitB9": 15,
+    "VitB12": 0,
+    "Ca": 10,
+    "Cu": 31,
+    "Fe": 0.27,
+    "Mg": 11,
+    "Mn": 0.110,
+    "P": 24,
+    "Se": 0.2,
+    "Zn": 0.20,
+    "K": 0.237,
+    "Na": 0.002
+},
+"Onions": {
+    "Calories": 40,
+    "TotalCarbohydrate": 9.34,
+    "LinoleicAcid": 0.027,
+    "AlphaLinoleicAcid": 0.008,
+    "Protein": 1.10,
+    "DietaryFiber": 1.7,
+    "VitA": 0,
+    "VitD": 0,
+    "VitE": 0.02,
+    "VitK": 0.4,
+    "VitC": 7.4,
+    "VitB1": 0.046,
+    "VitB2": 0.027,
+    "VitB3": 0.385,
+    "VitB5": 0.133,
+    "VitB6": 0.120,
+    "VitB9": 19,
+    "VitB12": 0,
+    "Ca": 23,
+    "Cu": 79,
+    "Fe": 0.17,
+    "Mg": 10,
+    "Mn": 0.120,
+    "P": 29,
+    "Se": 0.1,
+    "Zn": 0.17,
+    "K": 0.166,
+    "Na": 0.004
+},
+"Bell Peppers (Capsicum)": {
+    "Calories": 20,
+    "TotalCarbohydrate": 4.64,
+    "LinoleicAcid": 0.030,
+    "AlphaLinoleicAcid": 0.006,
+    "Protein": 0.86,
+    "DietaryFiber": 1.7,
+    "VitA": 1310.5,
+    "VitD": 0,
+    "VitE": 0.37,
+    "VitK": 6.3,
+    "VitC": 80.4,
+    "VitB1": 0.049,
+    "VitB2": 0.048,
+    "VitB3": 0.480,
+    "VitB5": 0.099,
+    "VitB6": 0.291,
+    "VitB9": 10,
+    "VitB12": 0,
+    "Ca": 10,
+    "Cu": 14,
+    "Fe": 0.43,
+    "Mg": 12,
+    "Mn": 0.175,
+    "P": 20,
+    "Se": 0.1,
+    "Zn": 0.25,
+    "K": 0.212,
+    "Na": 0.009
+},
+"Eggplants (Brinjal or Aubergine)": {
+    "Calories": 25,
+    "TotalCarbohydrate": 5.88,
+    "LinoleicAcid": 0.037,
+    "AlphaLinoleicAcid": 0.003,
+    "Protein": 1.01,
+    "DietaryFiber": 3.0,
+    "VitA": 3.5,
+    "VitD": 0,
+    "VitE": 0.18,
+    "VitK": 3.5,
+    "VitC": 2.2,
+    "VitB1": 0.039,
+    "VitB2": 0.037,
+    "VitB3": 0.649,
+    "VitB5": 0.281,
+    "VitB6": 0.084,
+    "VitB9": 22,
+    "VitB12": 0,
+    "Ca": 9,
+    "Cu": 19,
+    "Fe": 0.25,
+    "Mg": 14,
+    "Mn": 0.232,
+    "P": 24,
+    "Se": 0.2,
+    "Zn": 0.16,
+    "K": 0.229,
+    "Na": 0.004
+},
+"Okra (Ladyfinger or Bhindi)": {
+    "Calories": 33,
+    "TotalCarbohydrate": 7.45,
+    "LinoleicAcid": 0.035,
+    "AlphaLinoleicAcid": 0.004,
+    "Protein": 1.93,
+    "DietaryFiber": 3.2,
+    "VitA": 621.3,
+    "VitD": 0,
+    "VitE": 0.36,
+    "VitK": 31.3,
+    "VitC": 21.1,
+    "VitB1": 0.200,
+    "VitB2": 0.060,
+    "VitB3": 0.991,
+    "VitB5": 0.215,
+    "VitB6": 0.215,
+    "VitB9": 88,
+    "VitB12": 0,
+    "Ca": 82,
+    "Cu": 110,
+    "Fe": 0.62,
+    "Mg": 57,
+    "Mn": 0.220,
+    "P": 57,
+    "Se": 1.4,
+    "Zn": 0.24,
+    "K": 0.303,
+    "Na": 0.007
+},
+"Spinach (Palak)": {
+    "Calories": 23,
+    "TotalCarbohydrate": 3.63,
+    "LinoleicAcid": 0.041,
+    "AlphaLinoleicAcid": 0.002,
+    "Protein": 2.86,
+    "DietaryFiber": 2.2,
+    "VitA": 1889.9,
+    "VitD": 0,
+    "VitE": 2.03,
+    "VitK": 482.9,
+    "VitC": 28.1,
+    "VitB1": 0.078,
+    "VitB2": 0.189,
+    "VitB3": 0.724,
+    "VitB5": 0.110,
+    "VitB6": 0.195,
+    "VitB9": 194,
+    "VitB12": 0,
+    "Ca": 99,
+    "Cu": 61,
+    "Fe": 2.71,
+    "Mg": 79,
+    "Mn": 0.897,
+    "P": 49,
+    "Se": 1.0,
+    "Zn": 0.53,
+    "K": 0.558,
+    "Na": 0.079
+},
+"Cauliflower": {
+    "Calories": 25,
+    "TotalCarbohydrate": 4.97,
+    "LinoleicAcid": 0.032,
+    "AlphaLinoleicAcid": 0.002,
+    "Protein": 1.92,
+    "DietaryFiber": 2.0,
+    "VitA": 0,
+    "VitD": 0,
+    "VitE": 0.08,
+    "VitK": 15.5,
+    "VitC": 48.2,
+    "VitB1": 0.050,
+    "VitB2": 0.060,
+    "VitB3": 0.507,
+    "VitB5": 0.905,
+    "VitB6": 0.184,
+    "VitB9": 57,
+    "VitB12": 0,
+    "Ca": 22,
+    "Cu": 49,
+    "Fe": 0.42,
+    "Mg": 15,
+    "Mn": 0.155,
+    "P": 44,
+    "Se": 0.8,
+    "Zn": 0.28,
+    "K": 0.299,
+    "Na": 0.024
+},
+"Cabbage": {
+    "Calories": 23,
+    "TotalCarbohydrate": 5.37,
+    "LinoleicAcid": 0.036,
+    "AlphaLinoleicAcid": 0.002,
+    "Protein": 1.28,
+    "DietaryFiber": 2.5,
+    "VitA": 5.4,
+    "VitD": 0,
+    "VitE": 0.15,
+    "VitK": 76.0,
+    "VitC": 36.6,
+    "VitB1": 0.040,
+    "VitB2": 0.040,
+    "VitB3": 0.234,
+    "VitB5": 0.212,
+    "VitB6": 0.124,
+    "VitB9": 43,
+    "VitB12": 0,
+    "Ca": 40,
+    "Cu": 45,
+    "Fe": 0.28,
+    "Mg": 12,
+    "Mn": 0.160,
+    "P": 26,
+    "Se": 0.5,
+    "Zn": 0.18,
+    "K": 0.170,
+    "Na": 0.020
+},
+"Green Peas": {
+    "Calories": 81,
+    "TotalCarbohydrate": 14.45,
+    "LinoleicAcid": 0.061,
+    "AlphaLinoleicAcid": 0.008,
+    "Protein": 5.42,
+    "DietaryFiber": 5.1,
+    "VitA": 765.0,
+    "VitD": 0,
+    "VitE": 0.13,
+    "VitK": 24.8,
+    "VitC": 24.8,
+    "VitB1": 0.267,
+    "VitB2": 0.150,
+    "VitB3": 2.090,
+    "VitB5": 0.333,
+    "VitB6": 0.291,
+    "VitB9": 65,
+    "VitB12": 0,
+    "Ca": 25,
+    "Cu": 22,
+    "Fe": 1.47,
+    "Mg": 33,
+    "Mn": 0.410,
+    "P": 108,
+    "Se": 1.0,
+    "Zn": 1.24,
+    "K": 0.244,
+    "Na": 0.005
+},
+"Green Beans": {
+    "Calories": 31,
+    "TotalCarbohydrate": 7.13,
+    "LinoleicAcid": 0.036,
+    "AlphaLinoleicAcid": 0.001,
+    "Protein": 1.83,
+    "DietaryFiber": 3.4,
+    "VitA": 1737.4,
+    "VitD": 0,
+    "VitE": 0.41,
+    "VitK": 7.0,
+    "VitC": 16.3,
+    "VitB1": 0.073,
+    "VitB2": 0.070,
+    "VitB3": 0.634,
+    "VitB5": 0.345,
+    "VitB6": 0.141,
+    "VitB9": 33,
+    "VitB12": 0,
+    "Ca": 37,
+    "Cu": 45,
+    "Fe": 0.71,
+    "Mg": 25,
+    "Mn": 0.214,
+    "P": 38,
+    "Se": 0.4,
+    "Zn": 0.24,
+    "K": 0.211,
+    "Na": 0.006
+},
+"Bottle Gourd (Lauki or Dudhi)": {
+    "Calories": 15,
+    "TotalCarbohydrate": 3.39,
+    "LinoleicAcid": 0.041,
+    "AlphaLinoleicAcid": 0.002,
+    "Protein": 0.60,
+    "DietaryFiber": 0.5,
+    "VitA": 12.0,
+    "VitD": 0,
+    "VitE": 0.04,
+    "VitK": 1.0,
+    "VitC": 8.7,
+    "VitB1": 0.040,
+    "VitB2": 0.030,
+    "VitB3": 0.400,
+    "VitB5": 0.026,
+    "VitB6": 0.048,
+    "VitB9": 6,
+    "VitB12": 0,
+    "Ca": 11,
+    "Cu": 18,
+    "Fe": 0.20,
+    "Mg": 10,
+    "Mn": 0.100,
+    "P": 8,
+    "Se": 0.2,
+    "Zn": 0.14,
+    "K": 0.172,
+    "Na": 0.001
+},
+"Bitter Gourd (Karela)": {
+    "Calories": 17,
+    "TotalCarbohydrate": 3.70,
+    "LinoleicAcid": 0.049,
+    "AlphaLinoleicAcid": 0.002,
+    "Protein": 1.00,
+    "DietaryFiber": 2.6,
+    "VitA": 471.6,
+    "VitD": 0,
+    "VitE": 0.14,
+    "VitK": 4.8,
+    "VitC": 84.6,
+    "VitB1": 0.040,
+    "VitB2": 0.040,
+    "VitB3": 0.400,
+    "VitB5": 0.039,
+    "VitB6": 0.054,
+    "VitB9": 20,
+    "VitB12": 0,
+    "Ca": 17,
+    "Cu": 0,
+    "Fe": 0.30,
+    "Mg": 17,
+    "Mn": 0.110,
+    "P": 36,
+    "Se": 0.1,
+    "Zn": 0.77,
+    "K": 0.170,
+    "Na": 0.003
+},
+"Radishes": {
+    "Calories": 16,
+    "TotalCarbohydrate": 3.40,
+    "LinoleicAcid": 0.058,
+    "AlphaLinoleicAcid": 0.003,
+    "Protein": 0.68,
+    "DietaryFiber": 1.6,
+    "VitA": 8.0,
+    "VitD": 0,
+    "VitE": 0.12,
+    "VitK": 1.3,
+    "VitC": 14.8,
+    "VitB1": 0.030,
+    "VitB2": 0.030,
+    "VitB3": 0.350,
+    "VitB5": 0.098,
+    "VitB6": 0.071,
+    "VitB9": 25,
+    "VitB12": 0,
+    "Ca": 25,
+    "Cu": 12,
+    "Fe": 0.34,
+    "Mg": 10,
+    "Mn": 0.086,
+    "P": 20,
+    "Se": 0.1,
+    "Zn": 0.28,
+    "K": 0.233,
+    "Na": 0.002
+},
+"Coriander Leaves": {
+    "Calories": 23,
+    "TotalCarbohydrate": 3.67,
+    "LinoleicAcid": 0.049,
+    "AlphaLinoleicAcid": 0.006,
+    "Protein": 2.13,
+    "DietaryFiber": 2.8,
+    "VitA": 6748.0,
+    "VitD": 0,
+    "VitE": 2.50,
+    "VitK": 310.0,
+    "VitC": 27.0,
+    "VitB1": 0.067,
+    "VitB2": 0.162,
+    "VitB3": 1.042,
+    "VitB5": 0.239,
+    "VitB6": 0.149,
+    "VitB9": 62,
+    "VitB12": 0,
+    "Ca": 67,
+    "Cu": 0,
+    "Fe": 0.91,
+    "Mg": 26,
+    "Mn": 0.426,
+    "P": 48,
+    "Se": 0.2,
+    "Zn": 0.50,
+    "K": 0.521,
+    "Na": 0.012
+},
+"Mint Leaves": {
+    "Calories": 70,
+    "TotalCarbohydrate": 8.98,
+    "LinoleicAcid": 0.060,
+    "AlphaLinoleicAcid": 0.001,
+    "Protein": 3.75,
+    "DietaryFiber": 6.8,
+    "VitA": 155.0,
+    "VitD": 0,
+    "VitE": 0.73,
+    "VitK": 0.9,
+    "VitC": 31.8,
+    "VitB1": 0.082,
+    "VitB2": 0.130,
+    "VitB3": 0.958,
+    "VitB5": 0.338,
+    "VitB6": 0.129,
+    "VitB9": 82,
+    "VitB12": 0,
+    "Ca": 243,
+    "Cu": 14,
+    "Fe": 5.08,
+    "Mg": 80,
+    "Mn": 1.175,
+    "P": 55,
+    "Se": 0.2,
+    "Zn": 1.10,
+    "K": 0.569,
+    "Na": 0.030
+},
+"Fenugreek Leaves (Methi)": {
+    "Calories": 49,
+    "TotalCarbohydrate": 6.00,
+    "LinoleicAcid": 0.078,
+    "AlphaLinoleicAcid": 0.002,
+    "Protein": 4.40,
+    "DietaryFiber": 2.7,
+    "VitA": 170.0,
+    "VitD": 0,
+    "VitE": 0.93,
+    "VitK": 0.7,
+    "VitC": 176.0,
+    "VitB1": 0.089,
+    "VitB2": 0.110,
+    "VitB3": 1.530,
+    "VitB5": 0.374,
+    "VitB6": 0.191,
+    "VitB9": 57,
+    "VitB12": 0,
+    "Ca": 176,
+    "Cu": 16,
+    "Fe": 2.53,
+    "Mg": 34,
+    "Mn": 0.480,
+    "P": 43,
+    "Se": 1.5,
+    "Zn": 0.98,
+    "K": 0.770,
+    "Na": 0.050
+},
+"Garlic": {
+    "Calories": 149,
+    "TotalCarbohydrate": 33.06,
+    "LinoleicAcid": 0.048,
+    "AlphaLinoleicAcid": 0.003,
+    "Protein": 6.36,
+    "DietaryFiber": 2.1,
+    "VitA": 9.0,
+    "VitD": 0,
+    "VitE": 0.08,
+    "VitK": 1.7,
+    "VitC": 31.2,
+    "VitB1": 0.200,
+    "VitB2": 0.110,
+    "VitB3": 0.700,
+    "VitB5": 0.596,
+    "VitB6": 1.235,
+    "VitB9": 3,
+    "VitB12": 0,
+    "Ca": 181,
+    "Cu": 1.672,
+    "Fe": 1.70,
+    "Mg": 25,
+    "Mn": 1.672,
+    "P": 153,
+    "Se": 1.0,
+    "Zn": 1.160,
+    "K": 0.401,
+    "Na": 0.009
+},
+"Ginger": {
+    "Calories": 80,
+    "TotalCarbohydrate": 17.77,
+    "LinoleicAcid": 0.128,
+    "AlphaLinoleicAcid": 0.034,
+    "Protein": 1.82,
+    "DietaryFiber": 2.0,
+    "VitA": 0,
+    "VitD": 0,
+    "VitE": 0.26,
+    "VitK": 0.1,
+    "VitC": 5.0,
+    "VitB1": 0.025,
+    "VitB2": 0.034,
+    "VitB3": 0.750,
+    "VitB5": 0.203,
+    "VitB6": 0.160,
+    "VitB9": 11,
+    "VitB12": 0,
+    "Ca": 16,
+    "Cu": 0.226,
+    "Fe": 0.60,
+    "Mg": 43,
+    "Mn": 0.602,
+    "P": 34,
+    "Se": 0.7,
+    "Zn": 0.34,
+    "K": 0.415,
+    "Na": 0.002
+},
+"Beetroot": {
+    "Calories": 43,
+    "TotalCarbohydrate": 9.56,
+    "LinoleicAcid": 0.030,
+    "AlphaLinoleicAcid": 0.010,
+    "Protein": 1.61,
+    "DietaryFiber": 2.8,
+    "VitA": 2.0,
+    "VitD": 0,
+    "VitE": 0.04,
+    "VitK": 0.2,
+    "VitC": 4.9,
+    "VitB1": 0.031,
+    "VitB2": 0.040,
+    "VitB3": 0.334,
+    "VitB5": 0.155,
+    "VitB6": 0.067,
+    "VitB9": 80,
+    "VitB12": 0,
+    "Ca": 16,
+    "Cu": 0.158,
+    "Fe": 0.80,
+    "Mg": 23,
+    "Mn": 0.333,
+    "P": 40,
+    "Se": 0.4,
+    "Zn": 0.27,
+    "K": 0.325,
+    "Na": 0.064
+}
+        };
+
+        const FRUITS = {
+          "Mangoes": {
+    "Calories": 60,
+    "TotalCarbohydrate": 15,
+    "LinoleicAcid": 0.030,
+    "AlphaLinoleicAcid": 0.010,
+    "Protein": 0.82,
+    "DietaryFiber": 1.6,
+    "VitA": 54.4,
+    "VitD": 0,
+    "VitE": 0.90,
+    "VitK": 0.1,
+    "VitC": 36.4,
+    "VitB1": 0.030,
+    "VitB2": 0.040,
+    "VitB3": 0.334,
+    "VitB5": 0.155,
+    "VitB6": 0.080,
+    "VitB9": 43,
+    "VitB12": 0,
+    "Ca": 16,
+    "Cu": 0.158,
+    "Fe": 0.8,
+    "Mg": 23,
+    "Mn": 0.333,
+    "P": 40,
+    "Se": 0.4,
+    "Zn": 0.27,
+    "K": 0.35,
+    "Na": 0.064
+},
+"Grapes": {
+    "Calories": 69,
+    "TotalCarbohydrate": 18.1,
+    "LinoleicAcid": 0.030,
+    "AlphaLinoleicAcid": 0.010,
+    "Protein": 0.72,
+    "DietaryFiber": 0.9,
+    "VitA": 10.1,
+    "VitD": 0,
+    "VitE": 0.19,
+    "VitK": 0.1,
+    "VitC": 3.2,
+    "VitB1": 0.030,
+    "VitB2": 0.040,
+    "VitB3": 0.334,
+    "VitB5": 0.155,
+    "VitB6": 0.080,
+    "VitB9": 35,
+    "VitB12": 0,
+    "Ca": 16,
+    "Cu": 0.158,
+    "Fe": 0.7,
+    "Mg": 23,
+    "Mn": 0.333,
+    "P": 40,
+    "Se": 0.4,
+    "Zn": 0.27,
+    "K": 0.33,
+    "Na": 0.063
+},
+"Apples": {
+    "Calories": 52,
+    "TotalCarbohydrate": 14,
+    "LinoleicAcid": 0.030,
+    "AlphaLinoleicAcid": 0.010,
+    "Protein": 0.33,
+    "DietaryFiber": 2.4,
+    "VitA": 54.4,
+    "VitD": 0,
+    "VitE": 0.90,
+    "VitK": 0.1,
+    "VitC": 36.4,
+    "VitB1": 0.030,
+    "VitB2": 0.040,
+    "VitB3": 0.334,
+    "VitB5": 0.155,
+    "VitB6": 0.080,
+    "VitB9": 43,
+    "VitB12": 0,
+    "Ca": 16,
+    "Cu": 0.158,
+    "Fe": 0.8,
+    "Mg": 23,
+    "Mn": 0.333,
+    "P": 40,
+    "Se": 0.4,
+    "Zn": 0.27,
+    "K": 0.35,
+    "Na": 0.064
+},
+"Apricots": {
+    "Calories": 48,
+    "TotalCarbohydrate": 11,
+    "LinoleicAcid": 0.030,
+    "AlphaLinoleicAcid": 0.010,
+    "Protein": 0.7,
+    "DietaryFiber": 2.0,
+    "VitA": 19,
+    "VitD": 0,
+    "VitE": 0.30,
+    "VitK": 0.1,
+    "VitC": 10.4,
+    "VitB1": 0.030,
+    "VitB2": 0.040,
+    "VitB3": 0.334,
+    "VitB5": 0.155,
+    "VitB6": 0.080,
+    "VitB9": 13,
+    "VitB12": 0,
+    "Ca": 16,
+    "Cu": 0.158,
+    "Fe": 0.8,
+    "Mg": 23,
+    "Mn": 0.333,
+    "P": 40,
+    "Se": 0.4,
+    "Zn": 0.27,
+    "K": 0.35,
+    "Na": 0.064
+},
+"Oranges": {
+    "Calories": 47,
+    "TotalCarbohydrate": 12,
+    "LinoleicAcid": 0.030,
+    "AlphaLinoleicAcid": 0.010,
+    "Protein": 0.9,
+    "DietaryFiber": 2.4,
+    "VitA": 18,
+    "VitD": 0,
+    "VitE": 0.10,
+    "VitK": 0.1,
+    "VitC": 53.2,
+    "VitB1": 0.030,
+    "VitB2": 0.040,
+    "VitB3": 0.334,
+    "VitB5": 0.155,
+    "VitB6": 0.080,
+    "VitB9": 30,
+    "VitB12": 0,
+    "Ca": 16,
+    "Cu": 0.158,
+    "Fe": 0.8,
+    "Mg": 23,
+    "Mn": 0.333,
+    "P": 40,
+    "Se": 0.4,
+    "Zn": 0.27,
+    "K": 0.35,
+    "Na": 0.064
+},
+"Banana": {
+    "Calories": 89,
+    "TotalCarbohydrate": 23,
+    "LinoleicAcid": 0.030,
+    "AlphaLinoleicAcid": 0.010,
+    "Protein": 1.1,
+    "DietaryFiber": 2.6,
+    "VitA": 3.0,
+    "VitD": 0,
+    "VitE": 0.10,
+    "VitK": 0.1,
+    "VitC": 8.7,
+    "VitB1": 0.030,
+    "VitB2": 0.040,
+    "VitB3": 0.334,
+    "VitB5": 0.155,
+    "VitB6": 0.080,
+    "VitB9": 20,
+    "VitB12": 0,
+    "Ca": 16,
+    "Cu": 0.158,
+    "Fe": 0.8,
+    "Mg": 23,
+    "Mn": 0.333,
+    "P": 40,
+    "Se": 0.4,
+    "Zn": 0.27,
+    "K": 0.35,
+    "Na": 0.064
+},
+"Avocados": {
+    "Calories": 160,
+    "TotalCarbohydrate": 9,
+    "LinoleicAcid": 0.040,
+    "AlphaLinoleicAcid": 0.010,
+    "Protein": 2.0,
+    "DietaryFiber": 6.7,
+    "VitA": 6.0,
+    "VitD": 0,
+    "VitE": 0.60,
+    "VitK": 0.1,
+    "VitC": 12.3,
+    "VitB1": 0.030,
+    "VitB2": 0.040,
+    "VitB3": 0.334,
+    "VitB5": 0.155,
+    "VitB6": 0.080,
+    "VitB9": 81,
+    "VitB12": 0,
+    "Ca": 16,
+    "Cu": 0.158,
+    "Fe": 0.8,
+    "Mg": 23,
+    "Mn": 0.333,
+    "P": 40,
+    "Se": 0.4,
+    "Zn": 0.27,
+    "K": 0.35,
+    "Na": 0.064
+},
+"Guava": {
+    "Calories": 68,
+    "TotalCarbohydrate": 14,
+    "LinoleicAcid": 0.030,
+    "AlphaLinoleicAcid": 0.010,
+    "Protein": 2.6,
+    "DietaryFiber": 5.4,
+    "VitA": 624,
+    "VitD": 0,
+    "VitE": 0.90,
+    "VitK": 0.1,
+    "VitC": 228.3,
+    "VitB1": 0.030,
+    "VitB2": 0.040,
+    "VitB3": 0.334,
+    "VitB5": 0.155,
+    "VitB6": 0.080,
+    "VitB9": 49,
+    "VitB12": 0,
+    "Ca": 16,
+    "Cu": 0.158,
+    "Fe": 0.8,
+    "Mg": 23,
+    "Mn": 0.333,
+    "P": 40,
+    "Se": 0.4,
+    "Zn": 0.27,
+    "K": 0.35,
+    "Na": 0.064
+},
+"Litchi": {
+    "Calories": 66,
+    "TotalCarbohydrate": 16,
+    "LinoleicAcid": 0.030,
+    "AlphaLinoleicAcid": 0.010,
+    "Protein": 0.8,
+    "DietaryFiber": 1.3,
+    "VitA": 0,
+    "VitD": 0,
+    "VitE": 0.10,
+    "VitK": 0.1,
+    "VitC": 71.5,
+    "VitB1": 0.030,
+    "VitB2": 0.040,
+    "VitB3": 0.334,
+    "VitB5": 0.155,
+    "VitB6": 0.080,
+    "VitB9": 9,
+    "VitB12": 0,
+    "Ca": 16,
+    "Cu": 0.158,
+    "Fe": 0.8,
+    "Mg": 23,
+    "Mn": 0.333,
+    "P": 40,
+    "Se": 0.4,
+    "Zn": 0.27,
+    "K": 0.35,
+    "Na": 0.064
+},
+"Papaya": {
+    "Calories": 43,
+    "TotalCarbohydrate": 11,
+    "LinoleicAcid": 0.030,
+    "AlphaLinoleicAcid": 0.010,
+    "Protein": 0.5,
+    "DietaryFiber": 1.7,
+    "VitA": 950,
+    "VitD": 0,
+    "VitE": 0.30,
+    "VitK": 0.1,
+    "VitC": 60.9,
+    "VitB1": 0.030,
+    "VitB2": 0.040,
+    "VitB3": 0.334,
+    "VitB5": 0.155,
+    "VitB6": 0.080,
+    "VitB9": 38,
+    "VitB12": 0,
+    "Ca": 16,
+    "Cu": 0.158,
+    "Fe": 0.8,
+    "Mg": 23,
+    "Mn": 0.333,
+    "P": 40,
+    "Se": 0.4,
+    "Zn": 0.27,
+    "K": 0.35,
+    "Na": 0.064
+},
+"Sapota": {
+    "Calories": 83,
+    "TotalCarbohydrate": 19,
+    "LinoleicAcid": 0.030,
+    "AlphaLinoleicAcid": 0.010,
+    "Protein": 0.44,
+    "DietaryFiber": 5.3,
+    "VitA": 22,
+    "VitD": 0,
+    "VitE": 0.60,
+    "VitK": 0.1,
+    "VitC": 14.7,
+    "VitB1": 0.030,
+    "VitB2": 0.040,
+    "VitB3": 0.334,
+    "VitB5": 0.155,
+    "VitB6": 0.080,
+    "VitB9": 14,
+    "VitB12": 0,
+    "Ca": 16,
+    "Cu": 0.158,
+    "Fe": 0.8,
+    "Mg": 23,
+    "Mn": 0.333,
+    "P": 40,
+    "Se": 0.4,
+    "Zn": 0.27,
+    "K": 0.35,
+    "Na": 0.064
+},
+"Watermelons": {
+    "Calories": 30,
+    "TotalCarbohydrate": 8,
+    "LinoleicAcid": 0.030,
+    "AlphaLinoleicAcid": 0.010,
+    "Protein": 0.6,
+    "DietaryFiber": 0.4,
+    "VitA": 569,
+    "VitD": 0,
+    "VitE": 0.05,
+    "VitK": 0.1,
+    "VitC": 8.1,
+    "VitB1": 0.030,
+    "VitB2": 0.040,
+    "VitB3": 0.334,
+    "VitB5": 0.155,
+    "VitB6": 0.080,
+    "VitB9": 3,
+    "VitB12": 0,
+    "Ca": 16,
+    "Cu": 0.158,
+    "Fe": 0.8,
+    "Mg": 23,
+    "Mn": 0.333,
+    "P": 40,
+    "Se": 0.4,
+    "Zn": 0.27,
+    "K": 0.35,
+    "Na": 0.064
+}
+        };
+         
+        //Daily required macro and micronutrients, depending on age, sex, if pregnant or lactating
+        const USERS_NUTRIENT_REQUIRMENTS = {
+            "maleReq18": {
+                "reqTotalCarbohydrate": 130,
+                "reqLinoleicAcid": 17,
+                "reqAlphaLinoleicAcid": 1.6,
+                "reqProtein": 56,
+                "reqDietaryFiber": 38,
+                "reqVitA": 900,
+                "reqVitD": 15,
+                "reqVitE": 15,
+                "reqVitK": 120,
+                "reqVitC": 90,
+                "reqVitB1": 1.2,
+                "reqVitB2": 1.3,
+                "reqVitB3": 16,
+                "reqVitB5": 5,
+                "reqVitB6": 1.3,
+                "reqVitB9": 400,
+                "reqVitB12": 2.4,
+                "reqCa": 1000,
+                "reqCu": 900,
+                "reqFe": 8,
+                "reqMg": 400,
+                "reqMn": 2.3,
+                "reqP": 700,
+                "reqSe": 55,
+                "reqZn": 11,
+                "reqK": 4.7,
+                "reqNa": 1.5
+            },
+            "maleReq31": {
+                "reqTotalCarbohydrate": 130,
+                "reqLinoleicAcid": 17,
+                "reqAlphaLinoleicAcid": 1.6,
+                "reqProtein": 56,
+                "reqDietaryFiber": 38,
+                "reqVitA": 900,
+                "reqVitD": 15,
+                "reqVitE": 15,
+                "reqVitK": 120,
+                "reqVitC": 90,
+                "reqVitB1": 1.2,
+                "reqVitB2": 1.3,
+                "reqVitB3": 16,
+                "reqVitB5": 5,
+                "reqVitB6": 1.3,
+                "reqVitB9": 400,
+                "reqVitB12": 2.4,
+                "reqCa": 1000,
+                "reqCu": 900,
+                "reqFe": 8,
+                "reqMg": 420,
+                "reqMn": 2.3,
+                "reqP": 700,
+                "reqSe": 55,
+                "reqZn": 11,
+                "reqK": 4.7,
+                "reqNa": 1.5
+            },
+            "maleReq51": {
+                "reqTotalCarbohydrate": 130,
+                "reqLinoleicAcid": 14,
+                "reqAlphaLinoleicAcid": 1.6,
+                "reqProtein": 56,
+                "reqDietaryFiber": 30,
+                "reqVitA": 900,
+                "reqVitD": 15,
+                "reqVitE": 15,
+                "reqVitK": 120,
+                "reqVitC": 90,
+                "reqVitB1": 1.2,
+                "reqVitB2": 1.3,
+                "reqVitB3": 16,
+                "reqVitB5": 5,
+                "reqVitB6": 1.7,
+                "reqVitB9": 400,
+                "reqVitB12": 2.4,
+                "reqCa": 1000,
+                "reqCu": 900,
+                "reqFe": 8,
+                "reqMg": 420,
+                "reqMn": 2.3,
+                "reqP": 700,
+                "reqSe": 55,
+                "reqZn": 11,
+                "reqK": 4.7,
+                "reqNa": 1.3
+            },
+            "maleReq71": {
+                "reqTotalCarbohydrate": 130,
+                "reqLinoleicAcid": 14,
+                "reqAlphaLinoleicAcid": 1.6,
+                "reqProtein": 56,
+                "reqDietaryFiber": 30,
+                "reqVitA": 900,
+                "reqVitD": 20,
+                "reqVitE": 15,
+                "reqVitK": 120,
+                "reqVitC": 90,
+                "reqVitB1": 1.2,
+                "reqVitB2": 1.3,
+                "reqVitB3": 16,
+                "reqVitB5": 5,
+                "reqVitB6": 1.7,
+                "reqVitB9": 400,
+                "reqVitB12": 2.4,
+                "reqCa": 1200,
+                "reqCu": 900,
+                "reqFe": 8,
+                "reqMg": 420,
+                "reqMn": 2.3,
+                "reqP": 700,
+                "reqSe": 55,
+                "reqZn": 11,
+                "reqK": 4.7,
+                "reqNa": 1.2
+            },                                                        
+            "femaleReq18": {
+                "reqTotalCarbohydrate": 130,
+                "reqLinoleicAcid": 12,
+                "reqAlphaLinoleicAcid": 1.1,
+                "reqProtein": 46,
+                "reqDietaryFiber": 25,
+                "reqVitA": 700,
+                "reqVitD": 15,
+                "reqVitE": 15,
+                "reqVitK": 90,
+                "reqVitC": 75,
+                "reqVitB1": 1.1,
+                "reqVitB2": 1.1,
+                "reqVitB3": 14,
+                "reqVitB5": 5,
+                "reqVitB6": 1.3,
+                "reqVitB9": 400,
+                "reqVitB12": 2.4,
+                "reqCa": 1000,
+                "reqCu": 900,
+                "reqFe": 18,
+                "reqMg": 310,
+                "reqMn": 1.8,
+                "reqP": 700,
+                "reqSe": 55,
+                "reqZn": 8,
+                "reqK": 4.7,
+                "reqNa": 1.5
+            },
+            "femaleReq31": {
+                "reqTotalCarbohydrate": 130,
+                "reqLinoleicAcid": 12,
+                "reqAlphaLinoleicAcid": 1.1,
+                "reqProtein": 46,
+                "reqDietaryFiber": 25,
+                "reqVitA": 700,
+                "reqVitD": 15,
+                "reqVitE": 15,
+                "reqVitK": 90,
+                "reqVitC": 75,
+                "reqVitB1": 1.1,
+                "reqVitB2": 1.1,
+                "reqVitB3": 14,
+                "reqVitB5": 5,
+                "reqVitB6": 1.3,
+                "reqVitB9": 400,
+                "reqVitB12": 2.4,
+                "reqCa": 1000,
+                "reqCu": 900,
+                "reqFe": 18,
+                "reqMg": 320,
+                "reqMn": 1.8,
+                "reqP": 700,
+                "reqSe": 55,
+                "reqZn": 8,
+                "reqK": 4.7,
+                "reqNa": 1.5
+            },
+            "femaleReq51": {
+                "reqTotalCarbohydrate": 130,
+                "reqLinoleicAcid": 11,
+                "reqAlphaLinoleicAcid": 1.1,
+                "reqProtein": 46,
+                "reqDietaryFiber": 21,
+                "reqVitA": 700,
+                "reqVitD": 15,
+                "reqVitE": 15,
+                "reqVitK": 90,
+                "reqVitC": 75,
+                "reqVitB1": 1.1,
+                "reqVitB2": 1.1,
+                "reqVitB3": 14,
+                "reqVitB5": 5,
+                "reqVitB6": 1.5,
+                "reqVitB9": 400,
+                "reqVitB12": 2.4,
+                "reqCa": 1200,
+                "reqCu": 900,
+                "reqFe": 8,
+                "reqMg": 320,
+                "reqMn": 1.8,
+                "reqP": 700,
+                "reqSe": 55,
+                "reqZn": 8,
+                "reqK": 4.7,
+                "reqNa": 1.3
+            },
+            "femaleReq71": {
+                "reqTotalCarbohydrate": 130,
+                "reqLinoleicAcid": 11,
+                "reqAlphaLinoleicAcid": 1.1,
+                "reqProtein": 46,
+                "reqDietaryFiber": 21,
+                "reqVitA": 700,
+                "reqVitD": 20,
+                "reqVitE": 15,
+                "reqVitK": 90,
+                "reqVitC": 75,
+                "reqVitB1": 1.1,
+                "reqVitB2": 1.1,
+                "reqVitB3": 14,
+                "reqVitB5": 5,
+                "reqVitB6": 1.5,
+                "reqVitB9": 400,
+                "reqVitB12": 2.4,
+                "reqCa": 1200,
+                "reqCu": 900,
+                "reqFe": 8,
+                "reqMg": 320,
+                "reqMn": 1.8,
+                "reqP": 700,
+                "reqSe": 55,
+                "reqZn": 8,
+                "reqK": 4.7,
+                "reqNa": 1.2
+            },
+            "femalePregnant": {
+                "reqTotalCarbohydrate": 175,
+                "reqLinoleicAcid": 13,
+                "reqAlphaLinoleicAcid": 1.4,
+                "reqProtein": 71,
+                "reqDietaryFiber": 28,
+                "reqVitA": 770,
+                "reqVitD": 15,
+                "reqVitE": 15,
+                "reqVitK": 90,
+                "reqVitC": 85,
+                "reqVitB1": 1.4,
+                "reqVitB2": 1.4,
+                "reqVitB3": 18,
+                "reqVitB5": 6,
+                "reqVitB6": 1.9,
+                "reqVitB9": 600,
+                "reqVitB12": 2.6,
+                "reqCa": 1000,
+                "reqCu": 1000,
+                "reqFe": 27,
+                "reqMg": 360,
+                "reqMn": 2,
+                "reqP": 700,
+                "reqSe": 60,
+                "reqZn": 11,
+                "reqK": 4.7,
+                "reqNa": 1.5
+            },
+            "femaleLactating": {
+                "reqTotalCarbohydrate": 210,
+                "reqLinoleicAcid": 13,
+                "reqAlphaLinoleicAcid": 1.3,
+                "reqProtein": 71,
+                "reqDietaryFiber": 29,
+                "reqVitA": 1300,
+                "reqVitD": 15,
+                "reqVitE": 15,
+                "reqVitK": 90,
+                "reqVitC": 120,
+                "reqVitB1": 1.4,
+                "reqVitB2": 1.6,
+                "reqVitB3": 17,
+                "reqVitB5": 7,
+                "reqVitB6": 2,
+                "reqVitB9": 500,
+                "reqVitB12": 2.8,
+                "reqCa": 1000,
+                "reqCu": 1300,
+                "reqFe": 9,
+                "reqMg": 310,
+                "reqMn": 2.6,
+                "reqP": 700,
+                "reqSe": 70,
+                "reqZn": 12,
+                "reqK": 5.1,
+                "reqNa": 1.5
+            }
+        };
+
+        //Creating empty object for user's personal nutrient requirements
+        let userNutReq = {}; 
+       
+        //Checking if the required field are filled and moving to the next div
+        function logIn() {
+			let name = document.getElementById("inputName").value;
+            let question = document.getElementById("personalQuestion").innerHTML;
+            
+			if (name === "") {
+				document.getElementById("messageFillIn").innerHTML = "Please fill in the required fields.";
+            }
+            
+			else {
+                scrollTo(0,0);
+                document.getElementById("divLogIn").style.display = "none";
+                document.getElementById("divPersonalInfo").style.display = "block";
+				document.getElementById("personalGreeting").innerHTML = "HI, " + name.toUpperCase() + "!";
+                document.getElementById("personalQuestion").innerHTML = name.toUpperCase() + question;               
+			}
+        }
+        
+        //If the user is female, show select box, so she can choose if she is pregnant or lactating
+        function showSelect() {
+            let sexValue = document.getElementById("selectSex").value;
+            
+            if (sexValue === "female") {
+                document.getElementById("selectPregnantLactating").style.display = "inline-block";
+                document.getElementById("pregnantLactating").style.display = "inline-block";
+            }
+
+            else {
+                document.getElementById("selectPregnantLactating").style.display = "none";
+                document.getElementById("pregnantLactating").style.display = "none";
+                document.getElementById("selectPregnantLactating").value = "";
+            }
+        }
+
+        //Calculate and present energy requirements and personalized daily nutrient requirements
+		function calculate() {
+			let age = document.getElementById("inputAge").value;
+            let sex = document.getElementById("selectSex").value;
+            let pregnantOrLactating = document.getElementById("selectPregnantLactating").value;
+			let height = document.getElementById("inputHeight").value;
+            let weight = document.getElementById("inputWeight").value;
+            let lifestyle = document.getElementById("selectLifestyle").value;
+
+            //Inicializing activity coeficient (which depend of user's sex) and required calories (which depends of user's age, height, weight, sex, pregnant or lactating and activity)
+            let activity = 0;
+            let reqCalories = 0;  
+
+            //Checking if the form is filled
+			if (age === "" || sex === "") {
+				document.getElementById("messageFillIn2").innerHTML = "Please fill in the required fields.";
+            }
+            
+            else if ((height === "" || weight === "") || lifestyle === "") {
+				document.getElementById("messageFillIn2").innerHTML = "Please fill in the required fields.";
+            }
+
+            else if (age < 18) {
+                document.getElementById("messageFillIn2").innerHTML = "This app is not for users under 18 years";    
+            }
+
+            //If the form is filled, calculate
+            else {   
+                scrollTo(0,0);         
+                document.getElementById("divPersonalInfo").style.display = "none";
+                document.getElementById("divDailyRequirement").style.display = "block";
+
+                //Calculating calories and daily nutrient requirements
+                if (sex === "male") {
+                    //Calculating activity coeficient and required daily calories
+                    switch (lifestyle) {
+                        case "sedentary":
+                            activity = 1;
+                            break;
+                        case "littleActive":
+                            activity = 1.11;
+                            break;
+                        case "active":
+                            activity = 1.25;
+                            break;
+                        case "veryActive":
+                            activity = 1.48;
+                            break;
+                    }
+
+                    reqCalories = 662 - (9.53 * age) + activity * ( (15.91 * weight) + (539.6 * height / 100) );
+
+                    //Asigning age specific nutrient requirements for male users
+                    if (18 <= age <= 30) {
+                        userNutReq = USERS_NUTRIENT_REQUIRMENTS["maleReq18"];
+                    }
+                    else if (31 <= age <= 50) {
+                        userNutReq = USERS_NUTRIENT_REQUIRMENTS["maleReq31"];
+                    }
+                    else if (51 <= age <= 70) {
+                        userNutReq = USERS_NUTRIENT_REQUIRMENTS["maleReq51"];
+                    }
+                    else if (age >= 71) {
+                        userNutReq = USERS_NUTRIENT_REQUIRMENTS["maleReq71"];
+                    }
+                }
+
+                else if (sex === "female") {
+                    //Calculating activity coeficient and required daily calories
+                    switch (lifestyle) {
+                        case "sedentary":
+                            activity = 1;
+                            break;
+                        case "littleActive":
+                            activity = 1.12;
+                            break;
+                        case "active":
+                            activity = 1.27;
+                            break;
+                        case "veryActive":
+                            activity = 1.45;
+                            break;
+                    }
+
+                    reqCalories = 354 - (6.91 * age) + activity * ( (9.36 * weight) + (726 * height / 100) );
+                                       
+                    //Calculating calories & nutrient requirements when the user is pregnant or lactating
+                    if (pregnantOrLactating !== "") {
+                        switch (pregnantOrLactating) {
+                            case "pregnant2":
+                                reqCalories += 340;
+                                break;
+                            case "pregnant3":
+                                reqCalories += 452;
+                                break;
+                            case "lactating1":
+                                reqCalories += 330;
+                                break;
+                            case "lactating2":
+                                reqCalories += 400;
+                                break;
+                        }
+
+                        switch (pregnantOrLactating) {
+                            case "pregnant1":
+                            case "pregnant2":
+                            case "pregnant3":
+                                userNutReq = USERS_NUTRIENT_REQUIRMENTS["femalePregnant"];
+                                break;
+                            case "lactating1":
+                            case "lactating2":
+                                userNutReq = USERS_NUTRIENT_REQUIRMENTS["femaleLactating"];
+                                break;
+                        }
+                    }
+                    else {
+                        //Asigning age specific nutrient requirements for female users
+                        if (18 <= age <= 30) {
+                            userNutReq = USERS_NUTRIENT_REQUIRMENTS["femaleReq18"];
+                        }
+                        else if (31 <= age <= 50) {
+                            userNutReq = USERS_NUTRIENT_REQUIRMENTS["femaleReq31"];
+                        }
+                        else if (51 <= age <= 70) {
+                            userNutReq = USERS_NUTRIENT_REQUIRMENTS["femaleReq51"];
+                        }
+                        else if (age >= 71) {
+                            userNutReq = USERS_NUTRIENT_REQUIRMENTS["femaleReq71"];
+                        }
+                    }                   
+                }
+
+                //Adding calories property to user's object with nutrient requrements
+                userNutReq["reqCalories"] = reqCalories.toFixed(0);
+                
+                //Filling the table "Daily Requirement"
+                let tableReq = document.getElementById("tableDailyRequirement");
+                let cellReqId = "";
+
+                for (let rowIndex = 0; rowIndex < tableReq.rows.length; rowIndex++) {
+                    if (rowIndex == 6 || rowIndex == 19) {
+                    }
+                    else {
+                        cellReqId = tableReq.rows.item(rowIndex).cells[1].id;
+                        tableReq.rows.item(rowIndex).cells[1].innerHTML = userNutReq[cellReqId];
+                    }
+                }
+            }
+            
+		}
+
+        //Moving to divQuestion from 
+        function next() {
+            scrollTo(0,0);
+            document.getElementById("divDailyRequirement").style.display = "none";
+            document.getElementById("divQuestion").style.display = "block";  
+        }
+
+        //Moving to divFoodSelection
+        function checkMyDay() {
+            scrollTo(0,0);
+            document.getElementById("divQuestion").style.display = "none";
+            document.getElementById("divFoodSelection").style.display = "block";
+        }
+
+        //Storing row index of tableMyPlate
+        let rowIndexMyPlate = 0;
+
+        //Adding food artical and number input for entering food's quantity in tableMyPlate, if food is chosen in drop down menu
+        function addFood(foodCategory) {
+            let foodCategoryID = foodCategory.id;
+            let foodCategoryValue = document.getElementById(foodCategoryID).value;
+
+            if (foodCategoryValue !== "") {
+                document.getElementById("tableMyPlate").style.display = "block";
+    
+                rowIndexMyPlate++;
+                
+                let tableFood = document.getElementById("tableMyPlate");
+                let rowFood = tableFood.insertRow(rowIndexMyPlate);
+                let cellFood1 = rowFood.insertCell(0);
+                let cellFood2 = rowFood.insertCell(1);
+                let cellFood3 = rowFood.insertCell(2);
+                let cellFood4 = rowFood.insertCell(3);
+            
+                cellFood1.innerHTML = foodCategoryValue;  
+        
+                let inputCell2 = document.createElement("INPUT");
+                inputCell2.className = "inputsMyPlate";
+                inputCell2.type = "number";
+                inputCell2.name = "quantity";
+                inputCell2.value = 100;
+                cellFood2.appendChild(inputCell2);
+
+                cellFood3.innerHTML = "g ";
+            
+                let btnCell4 = document.createElement("BUTTON"); 
+                btnCell4.className = "btnDelete"; 
+                btnCell4.type = "button";
+                btnCell4.addEventListener("click", deleteRow);           
+                let textBtn = document.createTextNode("Delete");
+                btnCell4.appendChild(textBtn);     
+                cellFood4.appendChild(btnCell4);
+            }
+        }
+
+        //Calculating the sum of nutrients of all food and calling other function for calculating percents of fullfiled daily requirements
+        function tracking() {       
+            //Initiazilizing daily consumed nutrients
+            let totalNutrients = {
+                "Calories": 0,
+                "TotalCarbohydrate": 0,
+                "LinoleicAcid": 0,
+                "AlphaLinoleicAcid": 0,
+                "Protein": 0,
+                "DietaryFiber": 0,
+                "VitA": 0,
+                "VitD": 0,
+                "VitE": 0,
+                "VitK": 0,
+                "VitC": 0,
+                "VitB1": 0,
+                "VitB2": 0,
+                "VitB3": 0,
+                "VitB5": 0,
+                "VitB6": 0,
+                "VitB9": 0,
+                "VitB12": 0,
+                "Ca": 0,
+                "Cu": 0,
+                "Fe": 0,
+                "Mg": 0,
+                "Mn": 0,
+                "P": 0,
+                "Se": 0,
+                "Zn": 0,
+                "K": 0,
+                "Na": 0 
+            };    
+            let tableList = document.getElementById("tableMyPlate");
+            let foodValue = "";
+            let foodQuantityCell = "";
+            let foodQuantity = 0;
+            let foodCtg = {};
+
+            if (tableList.rows.length === 1) {
+                document.getElementById("messageFillIn3").innerHTML = "Please choose your food.";
+            }
+            
+            else {
+                scrollTo(0,0);
+                document.getElementById("divFoodSelection").style.display = "none";
+                document.getElementById("divNutritionTracker").style.display = "block";
+            
+                //Checking the food category
+                for (let indexRows = 1; indexRows < tableList.rows.length; indexRows++) {
+                    foodValue = tableList.rows.item(indexRows).cells[0].innerHTML;
+                    foodQuantityCell = tableList.rows.item(indexRows).cells[1];
+                    foodQuantity = foodQuantityCell.children[0].value;
+ 
+                    if (GRAINS.hasOwnProperty(foodValue)) {
+                        foodCtg = GRAINS;
+                    }
+                    else if (VEGETABLES.hasOwnProperty(foodValue)) {
+                        foodCtg = VEGETABLES;
+                    }
+                    else if (FRUITS.hasOwnProperty(foodValue)) {
+                        foodCtg = FRUITS;
+                    }
+
+                    totalNutrients["Calories"] += foodCtg[foodValue]["Calories"] * foodQuantity / 100;
+                    totalNutrients["TotalCarbohydrate"] += foodCtg[foodValue]["TotalCarbohydrate"] * foodQuantity / 100;
+                    totalNutrients["LinoleicAcid"] += foodCtg[foodValue]["LinoleicAcid"] * foodQuantity / 100;
+                    totalNutrients["AlphaLinoleicAcid"] += foodCtg[foodValue]["AlphaLinoleicAcid"] * foodQuantity / 100;
+                    totalNutrients["Protein"] += foodCtg[foodValue]["Protein"] * foodQuantity / 100;
+                    totalNutrients["DietaryFiber"] += foodCtg[foodValue]["DietaryFiber"] * foodQuantity / 100;
+                    totalNutrients["VitA"] += foodCtg[foodValue]["VitA"] * foodQuantity / 100;
+                    totalNutrients["VitD"] += foodCtg[foodValue]["VitD"] * foodQuantity / 100;
+                    totalNutrients["VitE"] += foodCtg[foodValue]["VitE"] * foodQuantity / 100;
+                    totalNutrients["VitK"] += foodCtg[foodValue]["VitK"] * foodQuantity / 100;
+                    totalNutrients["VitC"] += foodCtg[foodValue]["VitC"] * foodQuantity / 100;
+                    totalNutrients["VitB1"] += foodCtg[foodValue]["VitB1"] * foodQuantity / 100;
+                    totalNutrients["VitB2"] += foodCtg[foodValue]["VitB2"] * foodQuantity / 100;
+                    totalNutrients["VitB3"] += foodCtg[foodValue]["VitB3"] * foodQuantity / 100;
+                    totalNutrients["VitB5"] += foodCtg[foodValue]["VitB5"] * foodQuantity / 100;
+                    totalNutrients["VitB6"] += foodCtg[foodValue]["VitB6"] * foodQuantity / 100;
+                    totalNutrients["VitB9"] += foodCtg[foodValue]["VitB9"] * foodQuantity / 100;
+                    totalNutrients["VitB12"] += foodCtg[foodValue]["VitB12"] * foodQuantity / 100;
+                    totalNutrients["Ca"] += foodCtg[foodValue]["Ca"] * foodQuantity / 100;
+                    totalNutrients["Cu"] += foodCtg[foodValue]["Cu"] * foodQuantity / 100;
+                    totalNutrients["Fe"] += foodCtg[foodValue]["Fe"] * foodQuantity / 100;
+                    totalNutrients["Mg"] += foodCtg[foodValue]["Mg"] * foodQuantity / 100;
+                    totalNutrients["Mn"] += foodCtg[foodValue]["Mn"] * foodQuantity / 100;
+                    totalNutrients["P"] += foodCtg[foodValue]["P"] * foodQuantity / 100;
+                    totalNutrients["Se"] += foodCtg[foodValue]["Se"] * foodQuantity / 100;
+                    totalNutrients["Zn"] += foodCtg[foodValue]["Zn"] * foodQuantity / 100;
+                    totalNutrients["K"] += foodCtg[foodValue]["K"] * foodQuantity / 100;
+                    totalNutrients["Na"] += foodCtg[foodValue]["Na"] * foodQuantity / 100; 
+                }
+                
+                //calculating percenting of daily nutrients fullfilment and filling the tables cells
+                //Filling the table "Daily Requirement"
+                    let tableResult = document.getElementById("tableNutritionTracker");
+                    let cellResultId = "";
+                    let percents = 0;
+                    let str = "req";
+                    let prop = "";
+                
+                    for (let rowIndex = 0; rowIndex < tableResult.rows.length; rowIndex++) {
+                        if (rowIndex == 6 || rowIndex == 19) {
+                        }
+                        else {
+                            cellResultId = tableResult.rows.item(rowIndex).cells[1].id;
+                            prop = str.concat(cellResultId);
+                            percents = totalNutrients[cellResultId] / userNutReq[prop] * 100;
+                            tableResult.rows.item(rowIndex).cells[1].children[0].innerHTML = percents.toFixed(0) + "%";
+
+                            if (percents >= 100) {
+                                tableResult.rows.item(rowIndex).cells[1].children[0].style.width = "100%";
+                                tableResult.rows.item(rowIndex).cells[1].children[0].style.backgroundColor = "#8aff75";
+                            }
+                            else {
+                                tableResult.rows.item(rowIndex).cells[1].children[0].style.width = percents.toFixed(0) + "%";
+                                tableResult.rows.item(rowIndex).cells[1].children[0].style.backgroundColor = "#ff758a";
+                            }
+                        }
+                    }
+            }
+        }
+        
+        //Returning to add more foods on daily food list
+        function addMoreFood() {
+            scrollTo(0,0);
+            document.getElementById("divFoodSelection").style.display = "block";
+            document.getElementById("divNutritionTracker").style.display = "none";
+        }
+        
+        //Delete the row with the artical that the user doesn't need
+        function deleteRow() {
+            this.closest("tr").remove();
+
+            rowIndexMyPlate--;
+        }
+
+
+  </script>
+</body>
+
+</html>
